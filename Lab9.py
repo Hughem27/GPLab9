@@ -47,7 +47,7 @@ plt.axis('off')
 
 # Display the result for the first pair of images
 plt.figure(figsize=(8, 4))
-plt.subplot(121), plt.imshow(img_matches_bf), plt.title('BruteForceMatcher - House vs ATU2')
+plt.subplot(121), plt.imshow(img_matches_bf), plt.title('BruteForceMatcher')
 
 # Load new images
 img1_new = cv2.imread(r'C:\Lab9\castle.jpg')
@@ -71,7 +71,7 @@ matches_bf_new = sorted(matches_bf_new, key=lambda x: x.distance)
 img_matches_bf_new = cv2.drawMatches(img1_new, kp1_new, img2_new, kp2_new, matches_bf_new[:10], None, flags=2)
 
 # Display the result for the second pair of images
-plt.subplot(122), plt.imshow(img_matches_bf_new), plt.title('BruteForceMatcher - Dail vs Kitchen')
+plt.subplot(122), plt.imshow(img_matches_bf_new), plt.title('BruteForceMatcher')
 
 # Adjust layout for better display
 plt.tight_layout()
