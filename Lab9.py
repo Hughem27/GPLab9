@@ -39,8 +39,7 @@ imgShiTomasi = np.copy(ATU1)
 # Draw the corners on the image
 for i in shi_tomasi_corners:
     x, y = i.ravel()
-cv2.circle(imgShiTomasi, (int(x), int(y)), 3, 255, -1)
-
+    cv2.circle(imgShiTomasi, (int(x), int(y)), 3, 255, -1)  # Adjust the color (B, G, R) as needed
 
 # Display the results
 plt.figure(figsize=(10, 4))
@@ -49,7 +48,6 @@ plt.axis('off')
 plt.subplot(1, 2, 2), plt.imshow(cv2.cvtColor(imgShiTomasi, cv2.COLOR_BGR2RGB)), plt.title('Shi Tomasi Corners')
 plt.axis('off')
 plt.show()
-
 
 # Convert the images to grayscale
 gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
