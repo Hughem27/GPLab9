@@ -3,10 +3,27 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # Load the images
+ATU1 = cv2.imread(r'C:\Lab9\ATU1.jpg')
 img1 = cv2.imread(r'C:\Lab9\OperaHouse.jpg')  # Update with the correct path if needed
 img2 = cv2.imread(r'C:\Lab9\ATU2.jpg')
-# Load the image
 img = cv2.imread(r'C:\Lab9\OperaHouse.jpg')  # Update with the correct path to your image
+
+ATU1_gray = cv2.cvtColor(ATU1, cv2.COLOR_BGR2GRAY)
+
+# Harris corner detection
+ATU1_harris_corners = cv2.cornerHarris(ATU1_gray, blockSize=2, ksize=3, k=0.04)
+ATU1_harris_corners = cv2.dilate(ATU1_harris_corners, None)
+
+# Threshold for an "optimal value", marking the corners in red
+ATU1[ATU1_harris_corners > 0.01 * ATU1_harris_corners.max()] = [0, 0, 255]
+
+# Display the results
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 2, 1), plt.imshow(cv2.cvtColor(ATU1_gray, cv2.COLOR_BGR2RGB)), plt.title('Grayscale')
+plt.axis('off')
+plt.subplot(1, 2, 2), plt.imshow(cv2.cvtColor(ATU1, cv2.COLOR_BGR2RGB)), plt.title('Harris Corners')
+plt.axis('off')
+plt.show()
 
 # Convert the images to grayscale
 gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
