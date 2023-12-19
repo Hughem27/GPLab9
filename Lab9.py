@@ -25,6 +25,32 @@ plt.subplot(1, 2, 2), plt.imshow(cv2.cvtColor(ATU1, cv2.COLOR_BGR2RGB)), plt.tit
 plt.axis('off')
 plt.show()
 
+# Shi Tomasi corner detection (Good Features to Track)
+maxCorners = 50  # You can experiment with different numbers for maxCorners
+qualityLevel = 0.01
+minDistance = 10
+
+# Detect corners using Shi Tomasi algorithm
+shi_tomasi_corners = cv2.goodFeaturesToTrack(ATU1_gray, maxCorners, qualityLevel, minDistance)
+
+# Create a deep copy of the original image to display the corners
+imgShiTomasi = np.copy(ATU1)
+
+# Draw the corners on the image
+for i in shi_tomasi_corners:
+    x, y = i.ravel()
+cv2.circle(imgShiTomasi, (int(x), int(y)), 3, 255, -1)
+
+
+# Display the results
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 2, 1), plt.imshow(cv2.cvtColor(ATU1_gray, cv2.COLOR_BGR2RGB)), plt.title('Grayscale')
+plt.axis('off')
+plt.subplot(1, 2, 2), plt.imshow(cv2.cvtColor(imgShiTomasi, cv2.COLOR_BGR2RGB)), plt.title('Shi Tomasi Corners')
+plt.axis('off')
+plt.show()
+
+
 # Convert the images to grayscale
 gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
 gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
